@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="base.pojo">
+	<class name="Dict" table="basd_dict">
+		<id name="ID" column="d_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_dict_id</param>
+			</generator>
+		</id>
+		<property name="type" column="d_type" type="java.lang.String" length="100" />
+		<property name="item" column="d_item" type="java.lang.String" length="100" />
+		<property name="value" column="d_value" type="java.lang.String" length="100" />
+		<property name="isedit" column="p_isedit" type="java.lang.String" length="100" />
+		
+	</class>
+</hibernate-mapping>

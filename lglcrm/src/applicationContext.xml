@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" 
+	xmlns:tx="http://www.springframework.org/schema/tx">
+
+	<!-- 让spring支持注解 -->
+    <context:annotation-config/>
+    <!-- 指定哪些包下的类受可以让Spring通过注解来管理 -->
+    <context:component-scan base-package="sale,cust,base"/>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+		<property name="username" value="scott" />
+		<property name="password" value="tiger" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.Oracle9Dialect
+				</prop>
+				<!-- 配置数据库表没有的时候自动创建，有的话就则更新 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!-- 配置显示sql语句 -->
+				<prop key="hibernate.show_sql">false</prop>
+				<!-- 让输出的sql语句格式化 -->
+				<prop key="hibernate.format_sql">false</prop>
+
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>author/pojo/User.hbm.xml</value>
+				<value>author/pojo/Role.hbm.xml</value>
+				<value>author/pojo/Right.hbm.xml</value>
+				<value>author/pojo/Role_Right.hbm.xml</value>
+				
+				<value>sale/pojo/Sale.hbm.xml</value>
+				<value>sale/pojo/Plan.hbm.xml</value>
+				
+				<value>cust/pojo/Activity.hbm.xml</value>
+				<value>cust/pojo/Customer.hbm.xml</value>
+				<value>cust/pojo/Linkman.hbm.xml</value>
+				<value>cust/pojo/Lost.hbm.xml</value>
+				<value>cust/pojo/Orders.hbm.xml</value>
+				<value>cust/pojo/OrdersLine.hbm.xml</value>
+				<value>cust/pojo/Servicer.hbm.xml</value>
+				
+				
+				<value>base/pojo/Dict.hbm.xml</value>
+				<value>base/pojo/Product.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="pager" class="utils.page.Page">
+	</bean>
+
+	<!-- Dao,Service,Action层 -->
+	<!-- ————配置Dao—————— -->
+	<bean id="userDao" class="author.dao.imp.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="roleDao" class="author.dao.imp.RoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="rrDao" class="author.dao.imp.RoleRightDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置Service -->
+	<bean id="rrService" class="author.service.imp.RoleRightServiceImpl">
+		<property name="rrDao" ref="rrDao"></property>
+	</bean>
+
+	<bean id="userService" class="author.service.imp.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+		<property name="roleDao" ref="roleDao"></property>
+		<property name="rrDao" ref="rrDao"></property>
+	</bean>
+	
+	<bean id="roleService" class="author.service.imp.RoleServiceImpl">
+		<property name="roleDao" ref="roleDao"></property>
+	</bean>
+
+	<!-- 配置action -->
+	<!-- UserAction -->
+	<bean id="UserAction" class="author.action.UserAction">
+		<property name="userService" ref="userService"></property>
+		<property name="pager" ref="pager"></property>
+	</bean>
+	<!-- 配置RoleAction -->
+	<bean id="RoleAction" class="author.action.RoleAction">
+		<property name="pager" ref="pager"></property>
+		<property name="roleService" ref="roleService"></property>
+		<property name="rrService" ref="rrService"></property>
+	</bean>
+
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

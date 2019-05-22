@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="base.pojo">
+	<class name="Product" table="basd_product">
+		<id name="ID" column="p_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_product_id</param>
+			</generator>
+		</id>
+		<property name="name" column="p_name" type="java.lang.String" length="100" />
+		<property name="type" column="p_type" type="java.lang.String" length="100" />
+		<property name="batch" column="p_batch" type="java.lang.String" length="100" />
+		<property name="unit" column="p_unit" type="java.lang.String" length="100" />
+		<property name="price" column="p_price" type="java.lang.Integer" />
+		<property name="memo" column="p_memo" type="java.lang.String" length="100" />
+		<property name="storageName" column="p_storagename" type="java.lang.String" length="100" />
+		<property name="ware" column="p_ware" type="java.lang.String" length="100" />
+		<property name="count" column="p_count" type="java.lang.Integer" />
+	</class>
+</hibernate-mapping>

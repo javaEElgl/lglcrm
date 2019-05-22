@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="cust.pojo">
+	<class name="Activity" table="cst_activity">
+		<id name="ID" column="at_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_activity_id</param>
+			</generator>
+		</id>
+		<property name="date" column="at_date" type="java.lang.String" length="100"/>
+		<property name="place" column="at_place" type="java.lang.String" length="200"/>
+		<property name="title" column="at_title" type="java.lang.String" length="200"/>
+		<property name="desc" column="at_desc" type="java.lang.String" length="1000"/>
+
+		<many-to-one name="customer" class="Customer" column="at_cst_id" lazy="no-proxy" />
+	</class>
+</hibernate-mapping>

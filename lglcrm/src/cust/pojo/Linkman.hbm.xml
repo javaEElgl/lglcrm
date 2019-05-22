@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="cust.pojo">
+	<class name="Linkman" table="cst_linkman">
+		<id name="ID" column="lk_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_linkman_id</param>
+			</generator>
+		</id>
+		<property name="name" column="lk_name" type="java.lang.String" length="100"/>
+		<property name="sex" column="lk_sex" type="java.lang.String" length="100"/>
+		<property name="postion" column="lk_postion" type="java.lang.String" length="100"/>
+		<property name="tel" column="lk_tel" type="java.lang.String" length="100"/>
+		<property name="phone" column="lk_phone" type="java.lang.String" length="100"/>
+		<property name="memo" column="lk_memo" type="java.lang.String" length="200"/>
+
+		<many-to-one name="customer" class="Customer" column="lk_cst_id" lazy="no-proxy" />
+	</class>
+</hibernate-mapping>

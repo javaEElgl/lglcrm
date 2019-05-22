@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="cust.pojo">
+	<class name="Orders" table="orders">
+		<id name="ID" column="or_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_orders_id</param>
+			</generator>
+		</id>
+		<property name="date" column="or_date" type="java.lang.String" length="200"/>
+		<property name="addr" column="or_addr" type="java.lang.String" length="200"/>
+		<property name="status" column="or_status" type="java.lang.Integer" />
+		<property name="money" column="or_money" type="java.lang.Integer" />
+
+		<many-to-one name="customer" class="Customer" column="or_cst_id" lazy="no-proxy" />
+	</class>
+</hibernate-mapping>

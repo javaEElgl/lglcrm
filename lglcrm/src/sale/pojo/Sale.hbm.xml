@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="sale.pojo">
+	<class name="Sale" table="sal_sale">
+		<id name="id" column="s_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_sale_id</param>
+			</generator>
+		</id>
+		<property name="source" column="s_source" type="java.lang.String" length="100" />
+		<property name="name" column="s_name" type="java.lang.String" length="100" />
+		<property name="contact" column="s_contact" type="java.lang.String" length="100"  />
+		<property name="phone" column="s_phone" type="java.lang.String" length="100"  />
+		<property name="title" column="s_title" type="java.lang.String" length="100"  />
+		<property name="rate" column="s_rate" type="java.lang.String" length="100"  />
+		<property name="desc" column="s_desc" type="java.lang.String" length="2000"  />
+		<property name="createName" column="s_createname" type="java.lang.String" length="100"   />
+		<property name="createTime" column="s_createtime" type="java.lang.String" length="100"  />
+		<property name="dueName" column="s_duename" type="java.lang.String" length="100"   />
+		<property name="dueTime" column="s_duetime" type="java.lang.String" length="100"  />
+		<property name="status" column="s_status" type="java.lang.Integer"   />
+		
+		<set name="plan" inverse="true">
+			<key column="p_s_id" />
+			<one-to-many class="Plan" />
+		</set>
+	</class>
+</hibernate-mapping>

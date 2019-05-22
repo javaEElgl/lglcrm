@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<!-- loginInterceptor,判读用户是否登陆 -->
+			<interceptor name="loginInterceptor" class="utils.inter.loginInterceptor" />
+			<!-- 配置拦截器栈 ,显示配置默认拦截器 -->
+			<interceptor-stack name="all-stack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 全局结果 -->
+		<global-results>
+			<result name="unlogin">login.jsp</result>
+		</global-results>
+
+		<action name="findroleright" class="ajax.FindAction"></action>
+		<action name="user_login" class="UserAction" method="login">
+			<result name="login_success">/html/index.jsp</result>
+		</action>
+		<action name="user_exit" class="UserAction" method="exit">
+			<result name="exit">/login.jsp</result>
+		</action>
+		
+		<!-- user相关的通配符调用 -->
+		<action name="user_*" class="UserAction" method="{1}">
+			<result name="alluser">/html/~right/user.jsp</result>
+			<result name="findName">/html/~right/user.jsp</result>
+			<result name="toadd">/html/~right/user_add.jsp</result>
+			<result name="edit">/html/~right/user_edit.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="null">login.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+
+		<!-- role相关的通配符调用 -->
+		<action name="role_*" class="RoleAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~right/role.jsp</result>
+			<result name="add">/html/~right/role_add.jsp</result>
+			<result name="edit">/html/~right/role_edit.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		
+		<action name="sale_*" class="SaleAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~sale/sale.jsp</result>
+			<result name="add">/html/~sale/sale_add.jsp</result>
+			<result name="edit">/html/~sale/sale_edit.jsp</result>
+			<result name="dispatch">/html/~sale/sale_dispatch.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		
+		<action name="plan_*" class="PlanAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~sale/plan.jsp</result>
+			<result name="zdjh">/html/~sale/plan_zdjh.jsp</result>
+			<result name="execute">/html/~sale/plan_execute.jsp</result>
+			<result name="read">/html/~sale/plan_ck.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		
+		
+		
+		
+		<action name="customer_*" class="CustomerAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~cust/cust/customer.jsp</result>
+			<result name="add">/html/~cust/cust/customer_add.jsp</result>
+			<result name="edit">/html/~cust/cust/customer_edit.jsp</result>
+			<result name="rept">/html/~rept/cust_rept.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		<action name="linkman_*" class="LinkmanAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~cust/cust/linkman.jsp</result>
+			<result name="add">/html/~cust/cust/linkman_add.jsp</result>
+			<result name="edit">/html/~cust/cust/linkman_edit.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		<action name="activity_*" class="ActivityAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~cust/cust/activity.jsp</result>
+			<result name="add">/html/~cust/cust/activity_add.jsp</result>
+			<result name="edit">/html/~cust/cust/activity_edit.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		<action name="orders_*" class="OrdersAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~cust/cust/orders.jsp</result>
+			<result name="add">/html/~cust/cust/orders_add.jsp</result>
+			<result name="edit">/html/~cust/cust/orders_edit.jsp</result>
+			<result name="rept">/html/~rept/orders_rept.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		<action name="ordersline_*" class="OrdersLineAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~cust/cust/ordersline.jsp</result>
+			<result name="add">/html/~cust/cust/ordersline_add.jsp</result>
+			<result name="edit">/html/~cust/cust/ordersline_edit.jsp</result>
+			<result name="read">/html/~cust/cust/ordersline_read.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		<action name="lost_*" class="LostAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~cust/lost/lost.jsp</result>
+			<result name="add">/html/~cust/lost/lost_add.jsp</result>
+			<result name="edit">/html/~cust/lost/lost_edit.jsp</result>
+			<result name="qrls">/html/~cust/lost/lost_do.jsp</result>
+			<result name="read">/html/~cust/lost/lost_ck.jsp</result>
+			<result name="rept">/html/~rept/lost_rept.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		
+		
+		<action name="servicer_*" class="ServicerAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="add">/html/~cust/service/sv_add.jsp</result>
+			<result name="dispatch">/html/~cust/service/sv_dispatch.jsp</result>
+			<result name="dispatch_edit">/html/~cust/service/sv_dispatch_edit.jsp</result>
+			<result name="deal">/html/~cust/service/sv_deal.jsp</result>
+			<result name="deal_edit">/html/~cust/service/sv_deal_edit.jsp</result>
+			<result name="feedback">/html/~cust/service/sv_feedback.jsp</result>
+			<result name="feedback_edit">/html/~cust/service/sv_feedback_edit.jsp</result>
+			<result name="read">/html/~cust/service/sv_read.jsp</result>
+			<result name="read_edit">/html/~cust/service/sv_read_edit.jsp</result>
+			<result name="rept">/html/~rept/sv_rept.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		
+		<action name="dict_*" class="DictAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="success">/html/~basd/dict.jsp</result>
+			<result name="add">/html/~basd/dict_add.jsp</result>
+			<result name="edit">/html/~basd/dict_edit.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+		<action name="product_*" class="ProductAction" method="{1}">
+			<result name="error">/error.jsp</result>
+			<result name="pro_succ">/html/~basd/product.jsp</result>
+			<result name="add">/html/~basd/product_add.jsp</result>
+			<result name="sto_succ">/html/~basd/storage.jsp</result>
+			<interceptor-ref name="all-stack"/>
+		</action>
+	</package>
+</struts>    

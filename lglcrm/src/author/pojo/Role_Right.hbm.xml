@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	<!-- Right类的ORM对象关系映射文件 -->
+<hibernate-mapping package="author.pojo">
+	<class name="Role_Right" table="sys_role_right">
+		<id name="id" column="rr_id">
+			<generator class="sequence">
+				<param name="sequence">seq_rr_id</param>
+			</generator>
+		</id>
+		
+		<property name="roleId" column="rr_role_id" type="java.lang.Integer" />
+		<property name="rightId" column="rr_right_id" type="java.lang.Integer" />
+	</class>
+</hibernate-mapping>

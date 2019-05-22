@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="sale.pojo">
+	<class name="Plan" table="sal_plan">
+		<id name="id" column="p_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_plan_id</param>
+			</generator>
+		</id>
+		<property name="date" column="p_date" type="java.lang.String" length="100" />
+		<property name="todo" column="p_todo" type="java.lang.String" length="100" />
+		<property name="result" column="p_result" type="java.lang.String" length="100" />
+		
+		<many-to-one name="sale" class="Sale" column="p_s_id" lazy="no-proxy" />
+	</class>
+</hibernate-mapping>

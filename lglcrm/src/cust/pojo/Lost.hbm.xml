@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="cust.pojo">
+	<class name="Lost" table="cst_lost">
+		<id name="ID" column="lost_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_lost_id</param>
+			</generator>
+		</id>
+		<property name="customer" column="lost_customer" type="java.lang.String" length="100" unique="true" />
+		<property name="manager" column="lost_manager" type="java.lang.String" length="100"/>
+		<property name="orderdate" column="lost_orderdate" type="java.lang.String" length="100"/>
+		<property name="lostdate" column="lost_lostdate" type="java.lang.String" length="100"/>
+		<property name="delay" column="lost_delay" type="java.lang.String" length="200"/>
+		<property name="reason" column="lost_reason" type="java.lang.String" length="200"/>
+		<property name="status" column="lost_status" type="java.lang.Integer" />
+
+	</class>
+</hibernate-mapping>

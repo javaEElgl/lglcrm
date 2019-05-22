@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	<!-- Right类的ORM对象关系映射文件 -->
+<hibernate-mapping package="author.pojo">
+	<class name="Right" table="sys_right">
+		<id name="rightId" column="right_id" >
+			<generator class="native" >
+			</generator>
+		</id>
+		<property name="rightName" column="right_name" />
+
+		<set name="roles" table="sys_role_right" >
+			<key column="rr_right_id" />
+			<many-to-many class="Role" column="rr_role_id" />
+		</set>
+	</class>
+</hibernate-mapping>

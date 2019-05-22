@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="cust.pojo">
+	<class name="Servicer" table="cst_service">
+		<id name="ID" column="sv_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_service_id</param>
+			</generator>
+		</id>
+		<property name="type" column="sv_type" type="java.lang.String" length="100"/>
+		<property name="title" column="sv_title" type="java.lang.String" length="100"/>
+		<property name="custname" column="sv_custname" type="java.lang.String" length="100"/>
+		<property name="status" column="sv_status" type="java.lang.Integer" />
+		<property name="request" column="sv_request" type="java.lang.String" length="200"/>
+		<property name="createBy" column="sv_createBy" type="java.lang.String" length="100"/>
+		<property name="createDate" column="sv_createDate" type="java.lang.String" length="100"/>
+		<property name="dueTo" column="sv_dueTo" type="java.lang.String" length="100"/>
+		<property name="dueDate" column="sv_dueDate" type="java.lang.String" length="100"/>
+		<property name="deal" column="sv_deal" type="java.lang.String" length="200"/>
+		<property name="dealby" column="sv_dealby" type="java.lang.String" length="100"/>
+		<property name="dealDate" column="sv_dealDate" type="java.lang.String" length="100"/>
+		<property name="result" column="sv_result" type="java.lang.String" length="100"/>
+		<property name="satisfy" column="sv_satisfy" type="java.lang.Integer" />
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="cust.pojo">
+	<class name="OrdersLine" table="orders_line">
+		<id name="ID" column="ol_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_ordersline_id</param>
+			</generator>
+		</id>
+		<property name="count" column="ol_count" type="java.lang.Integer"/>
+		<property name="unit" column="ol_unit" type="java.lang.String" length="100"/>
+		<property name="price" column="ol_price" type="java.lang.Integer" />
+		<property name="product" column="ol_product" type="java.lang.String" length="100"/>
+
+		<many-to-one name="orders" class="Orders" column="ol_or_id" lazy="no-proxy" />
+	</class>
+</hibernate-mapping>

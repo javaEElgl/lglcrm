@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	<!-- Role类的ORM对象关系映射文件 -->
+<hibernate-mapping package="author.pojo">
+	<class name="Role" table="sys_role">
+		<id name="roleId" column="role_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_role_id</param>
+			</generator>
+		</id>
+		<property name="roleName" column="role_name"></property>
+		<!-- 和用户的一对多双向维护外键 -->
+		<set name="users">
+			<key column="u_role_id"></key>
+			<one-to-many class="User"/>
+		</set>
+		<!-- 和权限的多对多双向维护 -->
+		<set name="rights" table="sys_role_right" inverse="true">
+			<key column="rr_role_id"></key>
+			<many-to-many class="Right" column="rr_right_id"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

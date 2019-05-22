@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="cust.pojo">
+	<class name="Customer" table="cst_customer" >
+		<id name="ID" column="cst_id">
+			<generator class="sequence" >
+				<param name="sequence">seq_cust_id</param>
+			</generator>
+		</id>
+		<property name="no" column="cst_no" type="java.lang.String" length="100" unique="true"/>
+		<property name="name" column="cst_name" type="java.lang.String" length="100" unique="true"/>
+		<property name="region" column="cst_region" type="java.lang.String" length="100" />
+		<property name="manager" column="cst_manager" type="java.lang.String" length="100" />
+		<property name="level" column="cst_level" type="java.lang.String" length="100" />
+		<property name="satisfy" column="cst_satisfy" type="java.lang.String" length="100" />
+		<property name="credit" column="cst_credit" type="java.lang.String" length="100" />
+		<property name="addr" column="cst_addr" type="java.lang.String" length="100" />
+		<property name="zip" column="cst_zip" type="java.lang.String" length="100" />
+		<property name="tel" column="cst_tel" type="java.lang.String" length="100" />
+		<property name="fax" column="cst_fax" type="java.lang.String" length="100" />
+		<property name="website" column="cst_website" type="java.lang.String" length="100" />
+		<property name="licenceID" column="cst_licenceID" type="java.lang.String" length="100" />
+		<property name="chieftain" column="cst_chieftain" type="java.lang.String" length="100" />
+		<property name="bankroll" column="cst_bankroll" type="java.lang.String" length="100" />
+		<property name="turnover" column="cst_turnover" type="java.lang.String" length="100" />
+		<property name="bank" column="cst_bank" type="java.lang.String" length="100" />
+		<property name="bankID" column="cst_bankID" type="java.lang.String" length="100" />
+		<property name="localID" column="cst_localID" type="java.lang.String" length="100" />
+		<property name="nationalID" column="cst_nationalID" type="java.lang.String" length="100" />
+		<property name="status" column="cst_status" type="java.lang.Integer" />
+
+	</class>
+</hibernate-mapping>
